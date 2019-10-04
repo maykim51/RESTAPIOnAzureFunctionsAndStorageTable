@@ -1,0 +1,23 @@
+{
+  "name": "Starter-crud-azfn",
+  "version": "1.0.0",
+  "description": "Azure Function, NodeJS를 사용한 기본 API(CRUD)만들기\r https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/issues"
+  },
+  "homepage": "https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0"
+  }
+}

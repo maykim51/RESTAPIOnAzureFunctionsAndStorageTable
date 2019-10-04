@@ -3,6 +3,12 @@
 # Edit at https://www.gitignore.io/?templates=visualstudiocode
 
 old_*
+Others*
+Sample*
+node_modules
+
+## environment variables
+.env
 
 ### VisualStudioCode ###
 .vscode/*
