@@ -60,7 +60,7 @@ WIP...
 또는
 * 다음 사이트를 참조해서 Azure Portal에서 계정을 만든다.
     * [Table API 계정 만들기](https://docs.microsoft.com/en-us/azure/cosmos-db/create-table-dotnet#create-a-database-account)\
-    ![001](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/001.png?raw=true | width=100)
+    ![001](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/001.png?raw=true)
 
 
 **5. Function App에 Database 정보를 연결**
