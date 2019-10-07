@@ -1,9 +1,9 @@
-#WIP... (작업중)
+#Work in Progress (작업중인 포스트입니다)
 
-## Today I learned: 
+**Today I learned**
 # Create CRUD with NodeJS, Azure Functions, Azure Table Storage
-Azure Function, NodeJS를 사용한 기본 API(CRUD)만들기\
-https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs
+참고 공식문서: [Azure Function, NodeJS를 사용한 기본 API(CRUD)만들기](https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs)
+
 
 
 ## 다루는 내용
@@ -12,16 +12,20 @@ https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs
 
 ## 사전 준비
 * HTTP를 통한 Web-client간 기본 구동 지식
+* Visual Studio Code
 * 미리 만들어둔 Azure Functions 앱 프로젝트: [참고: VS Code에서 만들기](https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-develop-vs-code?tabs=nodejs)
     * Azure Function에 대한 포스트는 별도로 업로드 예정이니 지금은 위의 링크 참조!
 * Azure 계정, 구독
 
 
+\
+\
 
-### 1.준비하기(Setup)
+## 1.준비하기(Setup)
 **1. NodeJS 설치**
 * https://nodejs.org/en/download/ 접속 후 다운로드, 설치
 * Cmd에서 [node -v] 쳐서 버전 나오면 설치완료 된 것
+\
 
 
 **2. Azure Functions App 설치**
@@ -29,6 +33,7 @@ https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs
 > npm install -s azure-storage\
 > npm install -s uuid
 * 필요한 경우 [VS Code용 Azure Functions 확장을 설치](https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-create-first-function-vs-code)한다.
+\
 
 
 **3. 폴더 구조 만들기 Create CRUD folders**
@@ -73,7 +78,7 @@ https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs
 **5. Function App에 Database 정보를 연결**
 * 프로젝트 root 폴더에 .env 파일을 생성하고, CONNECTION STRING을 추가한다. (enronment variable)
     * CONNETION STRING은 Azure Portal Cosmos DB 리소스에서 조회할 수 있다
-    * Environment Variable을 추가하는 방법: [여기](https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786) 참고
+    * (참고) [Environment Variable을 추가하는 방법](https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786) 참고
 * [index.js]파일에 Azure Cosmos DB 연결을 추가한다
 ```
     //import package
@@ -105,16 +110,20 @@ const tableName = "mytable";
     ![003](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/003.png?raw=true)
     ![004](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/004.png?raw=true)
 
+\
 
 **7. 테이블에 샘플 데이터 추가하기**
 * 위에서 만든 테이블에서 **Entities** > **Add Entity** 선택
 * PartitionKey와 RowKey 입력
     ![005](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/005.png?raw=true)
-    ![006](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/006.png?raw=true)
+    ![006](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/006.png?raw=true)\
+
 [참고] [Azure Table Storage에 적용할 Table Partition 방법](https://docs.microsoft.com/en-us/rest/api/storageservices/designing-a-scalable-partitioning-strategy-for-azure-table-storage)
 
+\
 
-8. Item Update 폴더 안의 [function.json], [index.js]를 작업한다. (소스코드 참조)
+**8. index.js파일에 endpoint 작업하기** 
+* Item Update 폴더 안의 [function.json], [index.js]를 작업한다. (소스코드 참조)
 * [ItemUpdate] 폴더의 [index.js] 샘플
 ```
 //reads .env file and sets the environment variables.
@@ -162,4 +171,22 @@ module.exports = async function (context, req) {
   }
 };
 ```
+* 같은 작업을 다른 CRUD에도 적용한다. (ItemCreate, ItemRead, ItemDelete)
+* 완성된 소스코드는 [https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable) 참조!
 
+
+\
+\
+## 2.REST API 만들기
+
+여기까지 만든 endpoint들을 REST API 스타일로로 만드는 작업.\
+/items/{id} <- 이러한 URL endpoint를 만든다.
+
+**1.아직 로그인 하지 않았다면, 작업중인 Visual Studio Code에서 Azure 계정으로 로그인한다.**
+![007](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/007.png?raw=true)
+미리 만들어둔 Function App이 없으면 이 단계에서 새로 생성해도 된다.\
+이 예시에서는 'ms-food-fighter'라는 Function App에 만들어둔 Function들을 붙여넣었다.
+\
+
+**2. Azure Portal에서 
+* [Azure Portal](https://portal.azure.com)에 접속한다
