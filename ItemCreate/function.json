@@ -9,7 +9,7 @@
         "methods": [
           "post"
         ],
-        "route": "items/{*id}"
+        "route": "items/{id}"
       },
       {
         "type": "http",

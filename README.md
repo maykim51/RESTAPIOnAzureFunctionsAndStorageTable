@@ -1,7 +1,5 @@
-#Work in Progress (작업중인 포스트입니다)
-
-**Today I learned**
 # Create CRUD with NodeJS, Azure Functions, Azure Table Storage
+Azure Function을 이용해서 Azure Cosmos DB를 사용하는 기본 REST API 만들기! (NodeJS 사용)
 참고 공식문서: [Azure Function, NodeJS를 사용한 기본 API(CRUD)만들기](https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-nodejs)
 
 
@@ -171,10 +169,17 @@ module.exports = async function (context, req) {
 
 
 
-## 2.REST API 만들기
+## 2.REST API로 만들기
 
 여기까지 만든 endpoint들을 REST API 스타일로로 만드는 작업.\
 /items/{id} <- 이러한 URL endpoint를 만든다.
+
+여기서 만들 http function(endpoint)는 아래와 같다. (\*표는 option임을 의미)
+- \[POST\] http://localhost:7071/api/items
+- \[DELETE\] http://localhost:7071/api/items/{id}
+- \[GET\] http://localhost:7071/api/items/{*id}
+- \[PUT\] \[POST\] http://localhost:7071/api/items/{id}
+
 
 **1.아직 로그인 하지 않았다면, 작업중인 Visual Studio Code에서 Azure 계정으로 로그인한다.**
 ![007](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/007.png?raw=true)
@@ -182,7 +187,24 @@ module.exports = async function (context, req) {
 이 예시에서는 'ms-food-fighter'라는 Function App에 만들어둔 Function들을 붙여넣었다.
 
 
-**2. Azure Portal에서 
+**2. Azure Portal의 Azure Function 블레이드에서 설정하고, 반영된 설정을 로컬 소스파일에 적용한다.**
 * [Azure Portal](https://portal.azure.com)에 접속한다
+* *Integrate*을 선택한다.
+  ![008](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/008.png?raw=true)
+  * 만약 여기서 Azure Function이 'read-only'로 되어있으면 아래와 같은 문구가 보이는데, 
+  ![009](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/009.png?raw=true)
+  * 해결방법은 두 가지다.
+    해결방법 1. 모드 변경.
+    run-from-package 모드이기 때문에 발생하는 현상이다. 즉, 업로드된 ZIP에서 직접적으로 파일을 읽어오고 있기 때문에 편집할 수가 없는 모드인 것. 따라서 포털에서 WEBSITE_RUN_FROM_ZIP 또는 WEBSITE_RUN_FROM_PACKAGE 설정을 삭제해줘야 한다.
+    아래 화면처럼 Visual Studio Code의 Azure 메뉴에서 해당 설정을 쉽게 삭제할 수 있다.
+    ![013](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/013.png?raw=true)
 
-... 계속 추가중
+    해결방법 2. 프록시 생성.
+    로컬의 프로젝트에 proxies를 추가해주면 된다. 앱의 루트폴더(=host.json파일이 있는 곳]에 proxies.json 파일을 만들어주면 된다. [참조]( https://docs.microsoft.com/en-us/azure/azure-functions/functions-proxies)
+* ItemCreate의 route template을 아래와 같이 적용하면,
+  ![014](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/014.png?raw=true)
+  function.json 파일에 적용된다.
+  ![015](https://github.com/maykim51/Starter-AzureFunctions-AzureStorageTable/blob/master/images/015.png?raw=true)
+ * function.json 내용을 복사해서 VS code 에서(로컬 소스파일) 다른 endpoint들의 function.json을 붙여넣기 한다. 
+
+.... 작성 중.
